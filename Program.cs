@@ -3,7 +3,9 @@
 const long maxLen = 772; // https://web.archive.org/web/20211101165406/https://www.adobe.com/devnet-apps/photoshop/fileformatashtml/
 const int maxColors = 256;
 const int maxPaintDotNetColors = 96;
+#pragma warning disable CS8602 // Dereference of a possibly null reference.
 string version = Assembly.GetExecutingAssembly().GetName().Version.ToString(3);
+#pragma warning restore CS8602 // Dereference of a possibly null reference.
 ExtraData? extraData = null;
 
 if (args.Length != 2)
