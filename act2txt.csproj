@@ -8,6 +8,7 @@
     <PackAsTool>true</PackAsTool>
     <ToolCommandName>act2txt</ToolCommandName>
     <PackageOutputPath>nupkg</PackageOutputPath>
+    <License>MIT</License>
     <PackageReleaseNotes><![CDATA[
 - Add "-f" parameter to force overwrites
 ]]></PackageReleaseNotes>

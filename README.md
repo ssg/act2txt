@@ -19,3 +19,6 @@ Example:
 ```
 act2txt somepalette.act someplaette.txt
 ```
+
+# license
+MIT License
