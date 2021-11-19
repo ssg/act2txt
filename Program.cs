@@ -3,49 +3,23 @@
 const long maxActFileLength = 772; // https://web.archive.org/web/20211101165406/https://www.adobe.com/devnet-apps/photoshop/fileformatashtml/
 const int maxColors = 256;
 const int maxPaintDotNetColors = 96;
+ExtraData? extraData = null;
 #pragma warning disable CS8602 // Dereference of a possibly null reference.
                                // there's no chance executing assembly would be null.
 string version = Assembly.GetExecutingAssembly().GetName().Version.ToString(3);
 #pragma warning restore CS8602 // Dereference of a possibly null reference.
-bool overwrite = false;
-ExtraData? extraData = null;
 
 if (args.Length is < 2 or > 3)
 {
-    Console.WriteLine($"act2txt v{version} - (c) 2021 SSG");
-    Console.WriteLine("Converts Adobe Photoshop ACT Palette files to Paint.NET palette TXT format");
-    Console.WriteLine("Usage: act2txt [-f] inputfile outputfile");
-    Console.WriteLine("  -f    Overwrite output file if it exists");
+    return usage();
+}
+
+if (!parseArgs(args, out var files))
+{
     return 1;
 }
 
-int argIndex = 0;
-if (args.Length == 3)
-{
-    if (args[0] == "-f")
-    {
-        overwrite = true;
-        argIndex++;
-    }
-    else
-    {
-        return abort($"Invalid option: {args[0]}");
-    }
-}
-
-var inputFile = new FileInfo(args[argIndex]);
-if (!inputFile.Exists)
-{
-    return abort($"Input file not found");
-}
-
-var outputFile = new FileInfo(args[argIndex + 1]);
-if (!overwrite && outputFile.Exists)
-{
-    return abort("Output file already exists");
-}
-
-long len = inputFile.Length;
+long len = files.input.Length;
 if (len < 3)
 {
     return abort("Input file is too small");
@@ -63,7 +37,7 @@ if (numColors > maxPaintDotNetColors)
     Console.WriteLine($"Paint.NET only supports {maxPaintDotNetColors}, it will ignore the rest, fyi");
 }
 
-var inputStream = inputFile.OpenRead();
+var inputStream = files.input.OpenRead();
 var buffer = new byte[numColors * 3];
 
 inputStream.Read(buffer);
@@ -73,7 +47,7 @@ if (len == maxActFileLength)
 }
 inputStream.Close();
 
-var writer = File.CreateText(outputFile.FullName);
+var writer = File.CreateText(files.output.FullName);
 writer.WriteLine($"; Created by act2txt v{version} - https://github.com/ssg/act2txt");
 if (extraData is not null)
 {
@@ -87,7 +61,7 @@ for (int i = 0; i < buffer.Length; i += 3)
 }
 writer.Close();
 
-Console.WriteLine($"Written output to {outputFile.FullName}");
+Console.WriteLine($"Written output to {files.output.FullName}");
 return 0;
 
 ExtraData readExtraData()
@@ -104,6 +78,53 @@ ExtraData readExtraData()
 static int abort(string msg)
 {
     Console.WriteLine(msg);
+    return 1;
+}
+
+static bool fail(string message)
+{
+    Console.WriteLine(message);
+    return false;
+}
+
+bool parseArgs(string[] args, out (FileInfo input, FileInfo output) files)
+{
+    files = default;
+    int argIndex = 0;
+    bool overwrite = false;
+    if (args.Length == 3)
+    {
+        if (args[0] == "-f")
+        {
+            overwrite = true;
+            argIndex++;
+        }
+        else
+        {
+            return fail($"Invalid option: {args[0]}");
+        }
+    }
+    files.input = new FileInfo(args[argIndex]);
+    if (!files.input.Exists)
+    {
+        return fail($"Input file not found");
+    }
+
+    files.output = new FileInfo(args[argIndex + 1]);
+    if (!overwrite && files.output.Exists)
+    {
+        return fail("Output file already exists");
+    }
+
+    return true;
+}
+
+int usage()
+{
+    Console.WriteLine($"act2txt v{version} - (c) 2021 SSG");
+    Console.WriteLine("Converts Adobe Photoshop ACT Palette files to Paint.NET palette TXT format");
+    Console.WriteLine("Usage: act2txt [-f] inputfile outputfile");
+    Console.WriteLine("  -f    Overwrite output file if it exists");
     return 1;
 }
 
