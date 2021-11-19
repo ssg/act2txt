@@ -4,33 +4,51 @@ const long maxActFileLength = 772; // https://web.archive.org/web/20211101165406
 const int maxColors = 256;
 const int maxPaintDotNetColors = 96;
 #pragma warning disable CS8602 // Dereference of a possibly null reference.
+                               // there's no chance executing assembly would be null.
 string version = Assembly.GetExecutingAssembly().GetName().Version.ToString(3);
 #pragma warning restore CS8602 // Dereference of a possibly null reference.
+bool overwrite = false;
 ExtraData? extraData = null;
 
-if (args.Length != 2)
+if (args.Length is < 2 or > 3)
 {
     Console.WriteLine($"act2txt v{version} - (c) 2021 SSG");
     Console.WriteLine("Converts Adobe Photoshop ACT Palette files to Paint.NET palette TXT format");
-    abort("Usage: act2txt inputfile outputfile");
+    Console.WriteLine("Usage: act2txt [-f] inputfile outputfile");
+    Console.WriteLine("  -f    Overwrite output file if it exists");
+    return 1;
 }
 
-var inputFile = new FileInfo(args[0]);
+int argIndex = 0;
+if (args.Length == 3)
+{
+    if (args[0] == "-f")
+    {
+        overwrite = true;
+        argIndex++;
+    }
+    else
+    {
+        return abort($"Invalid option: {args[0]}");
+    }
+}
+
+var inputFile = new FileInfo(args[argIndex]);
 if (!inputFile.Exists)
 {
-    abort($"Input file not found");
+    return abort($"Input file not found");
 }
 
-var outputFile = new FileInfo(args[1]);
-if (outputFile.Exists)
+var outputFile = new FileInfo(args[argIndex + 1]);
+if (!overwrite && outputFile.Exists)
 {
-    abort("Output file already exists");
+    return abort("Output file already exists");
 }
 
 long len = inputFile.Length;
 if (len < 3)
 {
-    abort("Input file is too small");
+    return abort("Input file is too small");
 }
 
 if (len % 3 != 0 || len > maxActFileLength)
@@ -70,7 +88,7 @@ for (int i = 0; i < buffer.Length; i += 3)
 writer.Close();
 
 Console.WriteLine($"Written output to {outputFile.FullName}");
-Environment.Exit(0);
+return 0;
 
 ExtraData readExtraData()
 {
@@ -83,10 +101,10 @@ ExtraData readExtraData()
     };
 }
 
-static void abort(string msg)
+static int abort(string msg)
 {
     Console.WriteLine(msg);
-    Environment.Exit(1);
+    return 1;
 }
 
 struct ExtraData
