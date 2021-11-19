@@ -4,11 +4,11 @@
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <Version>0.2.0</Version>
+    <Version>0.4.0</Version>
     <PackAsTool>true</PackAsTool>
     <ToolCommandName>act2txt</ToolCommandName>
     <PackageOutputPath>nupkg</PackageOutputPath>
-    <License>MIT</License>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageReleaseNotes><![CDATA[
 - Add "-f" parameter to force overwrites
 ]]></PackageReleaseNotes>
