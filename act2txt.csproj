@@ -1,11 +1,23 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <Version>0.1.1</Version>
+    <PackAsTool>true</PackAsTool>
+    <ToolCommandName>act2txt</ToolCommandName>
+    <PackageOutputPath>nupkg</PackageOutputPath>
+    <PackageReleaseNotes><![CDATA[
+- Initial tool release
+]]></PackageReleaseNotes>
+  </PropertyGroup>
 
-    <PropertyGroup>
-        <OutputType>Exe</OutputType>
-        <TargetFramework>net6.0</TargetFramework>
-        <ImplicitUsings>enable</ImplicitUsings>
-        <Nullable>enable</Nullable>
-        <Version>0.1.0</Version>
-    </PropertyGroup>
+  <ItemGroup>
+    <EditorConfigFiles Remove="C:\Users\ssg\src\github\act2txt\.editorconfig" />
+  </ItemGroup>
 
+  <ItemGroup>
+    <None Include="C:\Users\ssg\src\github\act2txt\.editorconfig" />
+  </ItemGroup>
 </Project>
