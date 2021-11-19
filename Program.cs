@@ -1,11 +1,14 @@
-﻿const long maxLen = 772; // https://web.archive.org/web/20211101165406/https://www.adobe.com/devnet-apps/photoshop/fileformatashtml/
+﻿using System.Reflection;
+
+const long maxLen = 772; // https://web.archive.org/web/20211101165406/https://www.adobe.com/devnet-apps/photoshop/fileformatashtml/
 const int maxColors = 256;
 const int maxPaintDotNetColors = 96;
+string version = Assembly.GetExecutingAssembly().GetName().Version.ToString(3);
 ExtraData? extraData = null;
 
 if (args.Length != 2)
 {
-    Console.WriteLine("act2txt - convert Adobe Palette files to Paint.Net palette - (c) 2021 SSG");
+    Console.WriteLine($"act2txt v{version} - convert Adobe Palette files to Paint.Net palette - (c) 2021 SSG");
     abort("Usage: act2txt inputfile outputfile");
 }
 
@@ -63,7 +66,7 @@ if (File.Exists(args[1]))
 }
 
 var writer = File.CreateText(args[1]);
-writer.WriteLine("; Created by act2txt - https://github.com/ssg/act2txt");
+writer.WriteLine($"; Created by act2txt v{version} - https://github.com/ssg/act2txt");
 if (extraData is not null)
 {
     writer.WriteLine($"; ACT reported number of colors = {extraData?.NumColors}");
