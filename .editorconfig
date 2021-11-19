@@ -1,11 +1,10 @@
 # To learn more about .editorconfig see https://aka.ms/editorconfigdocs
 root = true
 
-# All files
 [*]
 indent_style = space
-max_line_length = 80
+indent_size = 4
+guidelines = 80
 
-# Xml files
-[*.xml;*.csproj]
+[*.csproj]
 indent_size = 2
