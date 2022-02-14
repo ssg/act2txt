@@ -4,13 +4,16 @@
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <Version>0.4.0</Version>
+    <Version>0.5.0</Version>
     <PackAsTool>true</PackAsTool>
     <ToolCommandName>act2txt</ToolCommandName>
     <PackageOutputPath>nupkg</PackageOutputPath>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageReleaseNotes><![CDATA[
-- Add "-f" parameter to force overwrites
+- Restructured code    
+- Added unit tests
+- Fixed a bug in parsing the transparent color index in ACT extra data 
+(which unit tests caught)
 ]]></PackageReleaseNotes>
   </PropertyGroup>
 

@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31912.275
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "act2txt", "act2txt.csproj", "{C60362CE-97CE-4074-98BC-240C30E68554}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "act2txt", "src\act2txt.csproj", "{B418C94E-8B41-4991-A4FB-14933CD44091}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "act2txt.Tests", "test\act2txt.Tests\act2txt.Tests.csproj", "{97D7E4EA-15BD-4B15-A6DF-452E0F37A99A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +13,14 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{C60362CE-97CE-4074-98BC-240C30E68554}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C60362CE-97CE-4074-98BC-240C30E68554}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C60362CE-97CE-4074-98BC-240C30E68554}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C60362CE-97CE-4074-98BC-240C30E68554}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B418C94E-8B41-4991-A4FB-14933CD44091}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B418C94E-8B41-4991-A4FB-14933CD44091}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B418C94E-8B41-4991-A4FB-14933CD44091}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B418C94E-8B41-4991-A4FB-14933CD44091}.Release|Any CPU.Build.0 = Release|Any CPU
+		{97D7E4EA-15BD-4B15-A6DF-452E0F37A99A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{97D7E4EA-15BD-4B15-A6DF-452E0F37A99A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{97D7E4EA-15BD-4B15-A6DF-452E0F37A99A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{97D7E4EA-15BD-4B15-A6DF-452E0F37A99A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
