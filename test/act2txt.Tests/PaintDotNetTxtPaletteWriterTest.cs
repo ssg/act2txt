@@ -14,7 +14,7 @@ namespace act2txt.Tests
             var pdnWriter = new PaintDotNetTxtPaletteWriter(writer);
             pdnWriter.WriteColor(Color.FromArgb(0x10, 0xAB, 0xFF));
             var result = writer.ToString();
-            Assert.That(result, Is.EqualTo("FF10ABFF\r\n"));
+            Assert.That(result, Is.EqualTo($"FF10ABFF{Environment.NewLine}"));
         }
 
         [Test]
@@ -29,7 +29,7 @@ namespace act2txt.Tests
             var pdnWriter = new PaintDotNetTxtPaletteWriter(writer);
             pdnWriter.WritePalette(pal);
             var result = writer.ToString();
-            Assert.That(result, Is.EqualTo("FF10ABFF\r\nFF010203\r\n"));
+            Assert.That(result, Is.EqualTo($"FF10ABFF{Environment.NewLine}FF010203{Environment.NewLine}"));
         }
 
         [Test]
@@ -39,7 +39,7 @@ namespace act2txt.Tests
             var pdnWriter = new PaintDotNetTxtPaletteWriter(writer);
             pdnWriter.WriteCommentLine("test");
             var result = writer.ToString();
-            Assert.That(result, Is.EqualTo("; test\r\n"));
+            Assert.That(result, Is.EqualTo($"; test{Environment.NewLine}"));
         }
     }
 }
