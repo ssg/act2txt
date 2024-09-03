@@ -1,7 +1,11 @@
 ﻿using System.Drawing;
+using System.Runtime.InteropServices;
 
 namespace act2txt;
 
+// this isn't used for reading data from the file
+// directly, so no struct field alignment directive
+// is necessary.
 public struct ActExtraData
 {
     public ushort NumColors;
@@ -26,7 +30,7 @@ public class ActPalette
 
         if (len < 3)
         {
-            Colors = Array.Empty<Color>();
+            Colors = [];
             return;
         }
 
